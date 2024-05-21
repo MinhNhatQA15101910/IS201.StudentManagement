@@ -2,6 +2,6 @@
 {
     public interface IAddUpdateStudentRequester
     {
-        void OnAddUpdateStudentFormClosed();
+        void OnReloadStudentList();
     }
 }

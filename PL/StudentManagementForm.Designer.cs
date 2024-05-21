@@ -30,7 +30,7 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.majorLabel = new System.Windows.Forms.Label();
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.dateOfBirthLabel = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@ namespace PL
             this.searchPanel = new System.Windows.Forms.Panel();
             this.searchTxt = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.featuresPanel = new System.Windows.Forms.Panel();
-            this.editBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.updateBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.deleteBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.addBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.studentListGroupBox = new System.Windows.Forms.GroupBox();
@@ -98,10 +98,10 @@ namespace PL
             // 
             this.studentListDgv.AllowUserToAddRows = false;
             this.studentListDgv.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.studentListDgv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.studentListDgv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.studentListDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.studentListDgv.Cursor = System.Windows.Forms.Cursors.Hand;
             this.studentListDgv.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -313,7 +313,7 @@ namespace PL
             // 
             // featuresPanel
             // 
-            this.featuresPanel.Controls.Add(this.editBtn);
+            this.featuresPanel.Controls.Add(this.updateBtn);
             this.featuresPanel.Controls.Add(this.deleteBtn);
             this.featuresPanel.Controls.Add(this.addBtn);
             this.featuresPanel.Location = new System.Drawing.Point(811, 260);
@@ -322,43 +322,43 @@ namespace PL
             this.featuresPanel.Size = new System.Drawing.Size(277, 124);
             this.featuresPanel.TabIndex = 54;
             // 
-            // editBtn
+            // updateBtn
             // 
-            this.editBtn.Location = new System.Drawing.Point(77, 64);
-            this.editBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.editBtn.Name = "editBtn";
-            this.editBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
-            this.editBtn.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
-            this.editBtn.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
-            this.editBtn.OverrideDefault.Border.Color2 = System.Drawing.Color.White;
-            this.editBtn.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.updateBtn.Location = new System.Drawing.Point(77, 64);
+            this.updateBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
+            this.updateBtn.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
+            this.updateBtn.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.updateBtn.OverrideDefault.Border.Color2 = System.Drawing.Color.White;
+            this.updateBtn.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.editBtn.Size = new System.Drawing.Size(125, 52);
-            this.editBtn.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.editBtn.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.editBtn.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
-            this.editBtn.StateCommon.Border.Color2 = System.Drawing.Color.White;
-            this.editBtn.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.updateBtn.Size = new System.Drawing.Size(125, 52);
+            this.updateBtn.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.updateBtn.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.updateBtn.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.updateBtn.StateCommon.Border.Color2 = System.Drawing.Color.White;
+            this.updateBtn.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.editBtn.StateCommon.Border.Rounding = 15;
-            this.editBtn.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.editBtn.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.editBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Trebuchet MS", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editBtn.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.editBtn.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.editBtn.StateTracking.Back.Color1 = System.Drawing.Color.White;
-            this.editBtn.StateTracking.Back.Color2 = System.Drawing.Color.White;
-            this.editBtn.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
-            this.editBtn.StateTracking.Border.Color2 = System.Drawing.Color.White;
-            this.editBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.updateBtn.StateCommon.Border.Rounding = 15;
+            this.updateBtn.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.updateBtn.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.updateBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Trebuchet MS", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateBtn.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.updateBtn.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.updateBtn.StateTracking.Back.Color1 = System.Drawing.Color.White;
+            this.updateBtn.StateTracking.Back.Color2 = System.Drawing.Color.White;
+            this.updateBtn.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.updateBtn.StateTracking.Border.Color2 = System.Drawing.Color.White;
+            this.updateBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.editBtn.TabIndex = 41;
-            this.editBtn.Values.Text = " SỬA";
-            this.editBtn.Click += new System.EventHandler(this.btnSua_Click);
+            this.updateBtn.TabIndex = 41;
+            this.updateBtn.Values.Text = " SỬA";
+            this.updateBtn.Click += new System.EventHandler(this.OnUpdateBtnClicked);
             // 
             // deleteBtn
             // 
@@ -434,7 +434,7 @@ namespace PL
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.addBtn.TabIndex = 39;
             this.addBtn.Values.Text = "THÊM";
-            this.addBtn.Click += new System.EventHandler(this.btnThem_Click);
+            this.addBtn.Click += new System.EventHandler(this.OnAddBtnClicked);
             // 
             // studentListGroupBox
             // 
@@ -566,6 +566,6 @@ namespace PL
         private System.Windows.Forms.PictureBox picBoLoc;
         private ComponentFactory.Krypton.Toolkit.KryptonButton addBtn;
         private ComponentFactory.Krypton.Toolkit.KryptonButton deleteBtn;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton editBtn;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton updateBtn;
     }
 }

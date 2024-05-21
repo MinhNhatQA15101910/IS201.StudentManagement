@@ -14,7 +14,7 @@ CREATE TABLE students (
 
 SET DATEFORMAT DMY;
 
-insert into students(student_id, full_name, date_of_birth, gender, major_name) values
+INSERT INTO students(student_id, full_name, date_of_birth, gender, major_name) VALUES
 ('21520007', N'Võ Thanh Bình', '15/05/2003', N'Nam', N'Khoa học máy tính'),
 ('21520013', N'Trương Bá Cường', '20/10/2003', N'Nam', N'Khoa học máy tính'),
 ('21520053', N'Nguyễn Hữu Hiếu', '17/09/2003', N'Nam', N'Khoa học máy tính'),

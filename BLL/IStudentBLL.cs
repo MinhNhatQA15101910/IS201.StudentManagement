@@ -8,5 +8,7 @@ namespace BLL
     {
         List<StudentDTO> GetAllStudents();
         MessageDTO DeleteStudent(string studentId);
+        MessageDTO AddStudent(StudentDTO student);
+        MessageDTO UpdateStudent(StudentDTO student);
     }
 }

@@ -2,6 +2,7 @@
 using ComponentFactory.Krypton.Toolkit;
 using DTO.Models;
 using DTO.Responses;
+using PL.IRequesters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PL
 {
-    public partial class StudentManagementForm : KryptonForm
+    public partial class StudentManagementForm : KryptonForm, IAddUpdateStudentRequester
     {
         private readonly IStudentBLL _studentBLL = new StudentBLL();
 
@@ -26,20 +27,6 @@ namespace PL
         public StudentManagementForm()
         {
             InitializeComponent();
-        }
-
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            //ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this);
-            //themSuaSinhVien.Show();
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            //CT_SinhVien sinhVien = mSinhVien[dgvDanhSachSinhVien.CurrentRow.Index];
-
-            //ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this, sinhVien);
-            //themSuaSinhVien.Show();
         }
 
         private void FormLoad(object sender, EventArgs e)
@@ -133,17 +120,40 @@ namespace PL
                 StudentDTO deletedStudent = _students[studentListDgv.CurrentRow.Index];
 
                 MessageDTO message = _studentBLL.DeleteStudent(studentId);
-                if (message.StatusCode == 500)
+                if (message.StatusCode != 200)
                 {
                     MessageBox.Show(message.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (message.StatusCode == 200)
+                else
                 {
                     _students.Remove(deletedStudent);
                     _allStudents.Remove(deletedStudent);
                     MessageBox.Show(message.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void OnAddBtnClicked(object sender, EventArgs e)
+        {
+            AddUpdateStudentForm form = new AddUpdateStudentForm(this);
+            form.ShowDialog();
+        }
+
+        private void OnUpdateBtnClicked(object sender, EventArgs e)
+        {
+            StudentDTO student = _students[studentListDgv.CurrentRow.Index];
+
+            AddUpdateStudentForm form = new AddUpdateStudentForm(this, student);
+            form.Show();
+        }
+
+        public void OnReloadStudentList()
+        {
+            _allStudents = _studentBLL.GetAllStudents();
+
+            _students = new BindingList<StudentDTO>(_allStudents);
+            _studentsSource = new BindingSource(_students, null);
+            studentListDgv.DataSource = _studentsSource;
         }
     }
 }
