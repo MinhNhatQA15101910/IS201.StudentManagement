@@ -2,6 +2,6 @@
 {
     public class ErrorDTO
     {
-        public string? Error { get; set; }
+        public string Error { get; set; }
     }
 }

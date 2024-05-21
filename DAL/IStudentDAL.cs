@@ -1,9 +1,9 @@
 ﻿using DTO.Models;
 using System.Collections.Generic;
 
-namespace BLL
+namespace DAL
 {
-    public interface IStudentBLL
+    public interface IStudentDAL
     {
         List<StudentDTO> GetAllStudents();
     }
