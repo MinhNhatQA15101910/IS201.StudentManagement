@@ -64,6 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddUpdateStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddUpdateStudentForm.Designer.cs">
+      <DependentUpon>AddUpdateStudentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IRequesters\IAddUpdateStudentRequester.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentManagementForm.cs">
@@ -72,6 +79,9 @@
     <Compile Include="StudentManagementForm.Designer.cs">
       <DependentUpon>StudentManagementForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddUpdateStudentForm.resx">
+      <DependentUpon>AddUpdateStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

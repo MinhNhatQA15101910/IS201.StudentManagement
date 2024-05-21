@@ -1,15 +1,22 @@
 ﻿using BLL;
 using ComponentFactory.Krypton.Toolkit;
 using DTO.Models;
+using DTO.Responses;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class StudentManagementForm : KryptonForm
     {
-        private IStudentBLL _studentBLL = new StudentBLL();
+        private readonly IStudentBLL _studentBLL = new StudentBLL();
+
+        private List<StudentDTO> _allStudents;
+        private List<StudentDTO> _filteredStudents;
 
         private BindingList<StudentDTO> _students;
         private BindingSource _studentsSource;
@@ -21,112 +28,10 @@ namespace PL
             InitializeComponent();
         }
 
-        private void dgvDanhSachSinhVien_SelectionChanged(object sender, EventArgs e)
-        {
-            //if (dgvDanhSachSinhVien.CurrentRow != null)
-            //{
-            //    dgvDanhSachSinhVien.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-
-            //    CT_SinhVien sinhVien = mSinhVien[dgvDanhSachSinhVien.CurrentRow.Index];
-            //    if (sinhVien != null)
-            //    {
-            //        txtMSSV.Text = sinhVien.MaSV;
-            //        txtHoTen.Text = sinhVien.HoTen;
-            //        txtNganh.Text = sinhVien.MaNganh + " - " + sinhVien.TenNganh;
-            //        txtNgaySinh.Text = sinhVien.NgaySinh.ToString("dd/MM/yyyy");
-            //        txtQueQuan.Text = sinhVien.TenHuyen + ", " + sinhVien.TenTTP;
-            //        txtKhoa.Text = sinhVien.MaKhoa + " - " + sinhVien.TenKhoa;
-            //        if (sinhVien.GioiTinh.Equals("Nam"))
-            //        {
-            //            rbtnNam.Checked = true;
-            //            rbtnNu.Checked = false;
-            //        }
-            //        else
-            //        {
-            //            rbtnNam.Checked = false;
-            //            rbtnNu.Checked = true;
-            //        }
-            //        mDoiTuong = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
-            //        mDoiTuongSource = new BindingSource(mDoiTuong, null);
-            //        lbDoiTuong.DataSource = mDoiTuongSource;
-            //        lbDoiTuong.DisplayMember = "TenDT";
-            //        lbDoiTuong.ValueMember = "MaDT";
-            //    }
-            //}
-        }
-
-        private void txtTimKiem_Enter(object sender, EventArgs e)
-        {
-            //if (txtTimKiem.Text.Equals(placeholderText))
-            //{
-            //    txtTimKiem.Text = "";
-            //    txtTimKiem.Font = new Font(txtTimKiem.Font, FontStyle.Regular);
-            //    txtTimKiem.ForeColor = SystemColors.ControlText;
-            //}
-        }
-
-        private void txtTimKiem_Leave(object sender, EventArgs e)
-        {
-            //if (string.IsNullOrEmpty(txtTimKiem.Text.Trim()))
-            //{
-            //    txtTimKiem.Text = placeholderText;
-            //    txtTimKiem.Font = new Font(txtTimKiem.Font, FontStyle.Italic);
-            //    txtTimKiem.ForeColor = SystemColors.GrayText;
-            //}
-        }
-
-        public void OnThemSuaSinhVienClosing()
-        {
-            //mSinhVien = new BindingList<CT_SinhVien>(_sinhVienBLLService.LayDSSV());
-            //mSinhVienSource.DataSource = mSinhVien;
-        }
-
-        private void btnQuayLai_Click(object sender, EventArgs e)
-        {
-            //Close();
-        }
-
-        private void picLoc_Click(object sender, EventArgs e)
-        {
-            //string searchQuery = txtTimKiem.Text.Trim().ToLower();
-
-            //BindingList<CT_SinhVien> filterList = new BindingList<CT_SinhVien>(mSinhVien.Where(d =>
-            //        d.MaSV.ToLower().Contains(searchQuery) ||
-            //        d.HoTen.ToLower().Contains(searchQuery)).ToList()
-            //    );
-            //mSinhVienSource.DataSource = filterList;
-        }
-
-        private void picBoLoc_Click(object sender, EventArgs e)
-        {
-            //mSinhVienSource.DataSource = mSinhVien;
-            //txtTimKiem.Text = placeholderText;
-        }
-
         private void btnThem_Click(object sender, EventArgs e)
         {
             //ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this);
             //themSuaSinhVien.Show();
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            //DialogResult result = MessageBox.Show("Bạn có muốn xóa sinh viên đã chọn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            //if (result == DialogResult.Yes)
-            //{
-            //    string maSV = dgvDanhSachSinhVien.CurrentRow.Cells["MaSV"].Value as string;
-            //    CT_SinhVien sinhVien = mSinhVien[dgvDanhSachSinhVien.CurrentRow.Index];
-
-            //    XoaSinhVienMessage message = _sinhVienBLLService.XoaSinhVien(maSV);
-            //    switch (message)
-            //    {
-            //        case XoaSinhVienMessage.Success:
-            //            mSinhVien.Remove(sinhVien);
-            //            MessageBox.Show("Xóa sinh viên thành công!");
-            //            break;
-            //    }
-            //}
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -139,7 +44,9 @@ namespace PL
 
         private void FormLoad(object sender, EventArgs e)
         {
-            _students = new BindingList<StudentDTO>(_studentBLL.GetAllStudents());
+            _allStudents = _studentBLL.GetAllStudents();
+
+            _students = new BindingList<StudentDTO>(_allStudents);
             _studentsSource = new BindingSource(_students, null);
             studentListDgv.DataSource = _studentsSource;
 
@@ -155,6 +62,88 @@ namespace PL
             studentListDgv.Columns["Id"].Visible = false;
             studentListDgv.Columns["DateOfBirth"].Visible = false;
             studentListDgv.Columns["Gender"].Visible = false;
+        }
+
+        private void OnStudentsGridViewSelectionChanged(object sender, EventArgs e)
+        {
+            if (studentListDgv.CurrentRow != null)
+            {
+                studentListDgv.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+
+                StudentDTO student = _students[studentListDgv.CurrentRow.Index];
+                if (student != null)
+                {
+                    studentIdTxt.Text = student.StudentId;
+                    fullNameTxt.Text = student.FullName;
+                    majorTxt.Text = student.MajorName;
+                    dateOfBirthTxt.Text = student.DateOfBirth.ToString("dd/MM/yyyy");
+                    maleRBtn.Checked = student.Gender.Equals("Nam");
+                    femaleRBtn.Checked = !student.Gender.Equals("Nam");
+                }
+            }
+        }
+
+        private void OnSearchTxtEntered(object sender, EventArgs e)
+        {
+            if (searchTxt.Text.Equals(_placeholderText))
+            {
+                searchTxt.Text = "";
+                searchTxt.Font = new Font(searchTxt.Font, FontStyle.Regular);
+                searchTxt.ForeColor = SystemColors.ControlText;
+            }
+        }
+
+        private void OnSearchTxtLeft(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchTxt.Text.Trim()))
+            {
+                searchTxt.Text = _placeholderText;
+                searchTxt.Font = new Font(searchTxt.Font, FontStyle.Italic);
+                searchTxt.ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        private void OnFilterClicked(object sender, EventArgs e)
+        {
+            string searchQuery = searchTxt.Text.Trim().ToLower();
+
+            _filteredStudents = _allStudents
+                .Where(s => s.StudentId.ToLower().Contains(searchQuery) ||
+                    s.FullName.ToLower().Contains(searchQuery) ||
+                    s.MajorName.ToLower().Contains(searchQuery))
+                .ToList();
+            _students = new BindingList<StudentDTO>(_filteredStudents);
+            _studentsSource.DataSource = _students;
+        }
+
+        private void OnCancelFilterClicked(object sender, EventArgs e)
+        {
+            _students = new BindingList<StudentDTO>(_allStudents);
+            _studentsSource.DataSource = _students;
+            searchTxt.Text = _placeholderText;
+        }
+
+        private void OnDeleteBtnClicked(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn xóa sinh viên đã chọn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string studentId = studentListDgv.CurrentRow.Cells["StudentId"].Value as string;
+                StudentDTO deletedStudent = _students[studentListDgv.CurrentRow.Index];
+
+                MessageDTO message = _studentBLL.DeleteStudent(studentId);
+                if (message.StatusCode == 500)
+                {
+                    MessageBox.Show(message.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (message.StatusCode == 200)
+                {
+                    _students.Remove(deletedStudent);
+                    _allStudents.Remove(deletedStudent);
+                    MessageBox.Show(message.Message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

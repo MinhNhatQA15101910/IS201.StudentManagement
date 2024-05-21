@@ -3,7 +3,7 @@ USE student_management_db;
 
 CREATE TABLE students (
 	id INT IDENTITY(1, 1) NOT NULL,
-	student_id VARCHAR(8) NOT NULL,
+	student_id VARCHAR(8) NOT NULL UNIQUE,
 	full_name NVARCHAR(100) NOT NULL, 
 	date_of_birth DATE NOT NULL, 
 	gender NVARCHAR(10) NOT NULL, 

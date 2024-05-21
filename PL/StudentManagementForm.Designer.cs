@@ -48,8 +48,6 @@ namespace PL
             this.fullNameLabel = new System.Windows.Forms.Label();
             this.studentIdLabel = new System.Windows.Forms.Label();
             this.searchPanel = new System.Windows.Forms.Panel();
-            this.picBoLoc = new System.Windows.Forms.PictureBox();
-            this.filterPictureBox = new System.Windows.Forms.PictureBox();
             this.searchTxt = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.featuresPanel = new System.Windows.Forms.Panel();
             this.editBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -58,14 +56,16 @@ namespace PL
             this.studentListGroupBox = new System.Windows.Forms.GroupBox();
             this.separatorPanel = new System.Windows.Forms.Panel();
             this.plt2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.picBoLoc = new System.Windows.Forms.PictureBox();
+            this.filterPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.studentListDgv)).BeginInit();
             this.titlePanel.SuspendLayout();
             this.detailInfoGroupBox.SuspendLayout();
             this.searchPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPictureBox)).BeginInit();
             this.featuresPanel.SuspendLayout();
             this.studentListGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // majorLabel
@@ -124,7 +124,7 @@ namespace PL
             this.studentListDgv.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.studentListDgv.StateCommon.HeaderColumn.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.studentListDgv.TabIndex = 46;
-            this.studentListDgv.SelectionChanged += new System.EventHandler(this.dgvDanhSachSinhVien_SelectionChanged);
+            this.studentListDgv.SelectionChanged += new System.EventHandler(this.OnStudentsGridViewSelectionChanged);
             // 
             // genderLabel
             // 
@@ -293,35 +293,6 @@ namespace PL
             this.searchPanel.Size = new System.Drawing.Size(779, 126);
             this.searchPanel.TabIndex = 53;
             // 
-            // picBoLoc
-            // 
-            this.picBoLoc.BackgroundImage = global::PL.Properties.Resources.img_cancel_filter;
-            this.picBoLoc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picBoLoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBoLoc.Location = new System.Drawing.Point(715, 38);
-            this.picBoLoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.picBoLoc.Name = "picBoLoc";
-            this.picBoLoc.Size = new System.Drawing.Size(40, 38);
-            this.picBoLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoLoc.TabIndex = 24;
-            this.picBoLoc.TabStop = false;
-            this.picBoLoc.Click += new System.EventHandler(this.picBoLoc_Click);
-            // 
-            // filterPictureBox
-            // 
-            this.filterPictureBox.BackgroundImage = global::PL.Properties.Resources.img_filter;
-            this.filterPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.filterPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.filterPictureBox.InitialImage = null;
-            this.filterPictureBox.Location = new System.Drawing.Point(669, 31);
-            this.filterPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.filterPictureBox.Name = "filterPictureBox";
-            this.filterPictureBox.Size = new System.Drawing.Size(40, 46);
-            this.filterPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.filterPictureBox.TabIndex = 23;
-            this.filterPictureBox.TabStop = false;
-            this.filterPictureBox.Click += new System.EventHandler(this.picLoc_Click);
-            // 
             // searchTxt
             // 
             this.searchTxt.Location = new System.Drawing.Point(25, 38);
@@ -337,8 +308,8 @@ namespace PL
             this.searchTxt.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchTxt.TabIndex = 10;
             this.searchTxt.Text = "🔎 Tìm kiếm";
-            this.searchTxt.Enter += new System.EventHandler(this.txtTimKiem_Enter);
-            this.searchTxt.Leave += new System.EventHandler(this.txtTimKiem_Leave);
+            this.searchTxt.Enter += new System.EventHandler(this.OnSearchTxtEntered);
+            this.searchTxt.Leave += new System.EventHandler(this.OnSearchTxtLeft);
             // 
             // featuresPanel
             // 
@@ -425,7 +396,7 @@ namespace PL
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.deleteBtn.TabIndex = 40;
             this.deleteBtn.Values.Text = " XÓA";
-            this.deleteBtn.Click += new System.EventHandler(this.btnXoa_Click);
+            this.deleteBtn.Click += new System.EventHandler(this.OnDeleteBtnClicked);
             // 
             // addBtn
             // 
@@ -504,6 +475,35 @@ namespace PL
             this.plt2.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.plt2.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
+            // picBoLoc
+            // 
+            this.picBoLoc.BackgroundImage = global::PL.Properties.Resources.img_cancel_filter;
+            this.picBoLoc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picBoLoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBoLoc.Location = new System.Drawing.Point(715, 38);
+            this.picBoLoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picBoLoc.Name = "picBoLoc";
+            this.picBoLoc.Size = new System.Drawing.Size(40, 38);
+            this.picBoLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoLoc.TabIndex = 24;
+            this.picBoLoc.TabStop = false;
+            this.picBoLoc.Click += new System.EventHandler(this.OnCancelFilterClicked);
+            // 
+            // filterPictureBox
+            // 
+            this.filterPictureBox.BackgroundImage = global::PL.Properties.Resources.img_filter;
+            this.filterPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.filterPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.filterPictureBox.InitialImage = null;
+            this.filterPictureBox.Location = new System.Drawing.Point(669, 31);
+            this.filterPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.filterPictureBox.Name = "filterPictureBox";
+            this.filterPictureBox.Size = new System.Drawing.Size(40, 46);
+            this.filterPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.filterPictureBox.TabIndex = 23;
+            this.filterPictureBox.TabStop = false;
+            this.filterPictureBox.Click += new System.EventHandler(this.OnFilterClicked);
+            // 
             // StudentManagementForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -531,10 +531,10 @@ namespace PL
             this.detailInfoGroupBox.PerformLayout();
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filterPictureBox)).EndInit();
             this.featuresPanel.ResumeLayout(false);
             this.studentListGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
